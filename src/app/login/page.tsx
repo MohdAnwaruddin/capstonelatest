@@ -63,7 +63,7 @@ const Login = () => {
     // If form is valid, proceed with submission
     try {
       const response = await axios.post(
-        'http://localhost:3001/api/auth/login',
+        'https://server-one-sand.vercel.app//api/auth/login',
         { username, email : username, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -77,7 +77,7 @@ const Login = () => {
       router.push('/');
     } catch (err: any) {
       console.log(err);
-      setError( err.response.data.error||err.response.data ||'something went wrong');
+      //setError( err.response.data.error||err.response.data ||'something went wrong');
     }
   }
   };
@@ -135,7 +135,7 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <label htmlFor="password" className="block font-medium leading-6 text-gray-900">Password</label>
               <div className="text-sm">
-                {/* <a href="#" className="font-semibold text-teal-600 hover:text-teal-500">Forgot password?</a> */}
+                <a href="#" className="font-semibold text-teal-600 hover:text-teal-500">Forgot password?</a>
               </div>
             </div>
             <div className="mt-2">

@@ -17,7 +17,7 @@ const Comment = ({ id }: any) => {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/news/id/${id}/comments`
+          `https://server-one-sand.vercel.app//api/news/id/${id}/comments`
         );
         console.log("Response data:", response.data);
         setCommentInfo(response.data.comments); // Assuming the response data is an object containing a 'comments' array
@@ -39,7 +39,7 @@ const Comment = ({ id }: any) => {
     if (newComment.trim().length > 0) {
       try {
         const response = await axios.post(
-          `http://localhost:3001/api/news/id/${id}/comments`,
+          `https://server-one-sand.vercel.app//api/news/id/${id}/comments`,
           { text: newComment, username  }
         );
         const newCommentData = response.data;

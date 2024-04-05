@@ -40,7 +40,7 @@ const Register = () => {
 
         try {
             // Make POST request to register endpoint
-            const response = await axios.post('http://localhost:3001/api/auth/register', data,config);
+            const response = await axios.post('https://server-one-sand.vercel.app//api/auth/register', data,config);
 
             console.log('Registration successful');
             router.push('/login');
