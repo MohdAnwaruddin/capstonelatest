@@ -31,8 +31,8 @@ const AllNews: React.FC<AllNewsProps> = () => {
     try {
       const response = await axios.get(
         category
-          ? `https://server-one-sand.vercel.app//api/news/category/${category}`
-          : "https://server-one-sand.vercel.app//api/news"
+          ? `https://server-one-sand.vercel.app/api/news/category/${category}`
+          : "https://server-one-sand.vercel.app/api/news"
       );
       setMyNews(response.data);
     } catch (error) {

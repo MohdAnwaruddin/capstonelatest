@@ -63,7 +63,7 @@ const Login = () => {
     // If form is valid, proceed with submission
     try {
       const response = await axios.post(
-        'https://server-one-sand.vercel.app//api/auth/login',
+        'https://server-one-sand.vercel.app/api/auth/login',
         { username, email : username, password },
         { headers: { 'Content-Type': 'application/json' } }
       );

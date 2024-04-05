@@ -25,7 +25,7 @@ export default function Id({ params }: any) {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `https://server-one-sand.vercel.app//api/news/id/${params.id}`
+          `https://server-one-sand.vercel.app/api/news/id/${params.id}`
         );
         //console.log('data:',response.data);
         setNewsInfo(response.data);
