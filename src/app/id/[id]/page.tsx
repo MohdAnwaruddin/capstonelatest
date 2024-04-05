@@ -47,9 +47,9 @@ export default function Id({ params }: any) {
         <h5 className="mb-4 mt-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {newsInfo?.title}
         </h5>
-        <img
-          className="pt-4 w-full h-62 rounded-t-lg"
-          src={newsInfo?.urlToImage}
+        <img 
+          className="pt-4 w-full h-62 rounded-t-lg" 
+          src={newsInfo?.urlToImage || ""}
           alt=""
         />
         <p className="pt-4 mb-3 mt-3 font-normal text-gray-700 dark:text-gray-400">
