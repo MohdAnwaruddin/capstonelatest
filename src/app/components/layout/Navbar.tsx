@@ -1,18 +1,22 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import axios from "axios";
+import axiosInstance from "../../../../axiosInstance";
 
-const categories = ["health", "science", "entertainment","buisness","sports"];
+const categories = ["all", "health", "science", "entertainment","buisness","sports"];
 
 const Navbar = () => {
   const fetchCategoryNews = async (category: string) => {
+    let tempCategory = category
+    if(tempCategory == "all"){
+      return
+    }
     try {
-      const response = await axios.get(`http://localhost:8000/api/news/category/${category}`);
-      console.log(`News for category ${category}:`, response.data);
+      const response = await axiosInstance.get(`http://localhost:8000/api/news/category/${tempCategory}`);
+      console.log(`News for category ${tempCategory}:`, response.data);
       // Handle setting news data state in the parent component (e.g., AllNews)
     } catch (error) {
-      console.error(`Error fetching news for category ${category}:`, error);
+      console.error(`Error fetching news for category ${tempCategory}:`, error);
     }
   };
 
@@ -36,8 +40,8 @@ const NavItem: React.FC<NavItemProps> = ({ category, onClick }) => {
   };
 
   return (
-    <button className="button hover:text-orange-500 cursor-pointer" onClick={handleClick}>
-      {category.charAt(0).toUpperCase() + category.slice(1)}
+    <button className="button hover:text-orange-500 cursor-pointer" onClick={()=> handleClick}>
+      {category.charAt(0).toUpperCase() + category.slice(1)}sss
     </button>
   );
 };

@@ -1,7 +1,7 @@
 // Import useContext from react
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../../../axiosInstance";
 import AuthContext, { AuthContextType } from "@/context/AuthContext"; // Import AuthContext
 import Search from "@/app/components/layout/Search";
 
@@ -24,15 +24,23 @@ const AllNews: React.FC<AllNewsProps> = () => {
   const authContext = useContext(AuthContext); // Retrieve auth context
 
   const [mynews, setMyNews] = useState<Article[]>([]);
-  const [category, setCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const fetchData = async () => {
+    let tempCategory = category
+    console.log(tempCategory,"lllllllllll4")
+    if(tempCategory){
+      if(tempCategory=="all"){
+        tempCategory = null
+      }
+      setMyNews([])
+    }
     try {
-      const response = await axios.get(
-        category
-          ? `https://server-one-sand.vercel.app/api/news/category/${category}`
-          : "https://server-one-sand.vercel.app/api/news"
+      const response = await axiosInstance.get(
+        tempCategory
+          ? `/api/news/category/${tempCategory}`
+          : "/api/news"
       );
       setMyNews(response.data);
     } catch (error) {
@@ -41,6 +49,7 @@ const AllNews: React.FC<AllNewsProps> = () => {
   };
 
   useEffect(() => {
+    
     fetchData();
   }, [category]);
 
@@ -57,6 +66,7 @@ const AllNews: React.FC<AllNewsProps> = () => {
       setMyNews(filteredNews);
     } else {
       // If searchTerm is empty, fetch all news again
+      // if(mynews.length==0)
       fetchData();
     }
   }, [searchTerm]);
@@ -79,7 +89,7 @@ const AllNews: React.FC<AllNewsProps> = () => {
         <Search onFilter={setSearchTerm} />
         <Navbar onCategoryChange={handleCategoryChange} />
         <div className="grid">
-          {mynews.map((ele: Article, index: number) => (
+          {mynews.length>0 && mynews.map((ele: Article, index: number) => (
             <div
               key={index}
               className="mt-8 max-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transition duration-150 ease-out hover:scale-105 flex flex-col"
@@ -149,6 +159,9 @@ const AllNews: React.FC<AllNewsProps> = () => {
             </div>
           ))}
         </div>
+        {mynews.length==0 && <div className="loading">
+          Loading...please wait
+          </div>}
       </div>
     </>
   );
@@ -160,6 +173,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onCategoryChange }) => {
   const categories = [
+    "all",
     "health",
     "science",
     "entertainment",
@@ -172,7 +186,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCategoryChange }) => {
       {categories.map((category, index) => (
         <div
           key={index}
-          className="button hover:text-orange-500 cursor-pointer"
+          className="button hover:text-orange-500 cursor-pointer dark:text-slate-200"
           onClick={() => onCategoryChange(category)}
         >
           {category.charAt(0).toUpperCase() + category.slice(1)}

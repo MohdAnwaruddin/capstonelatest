@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./Footer/page";
 import { AuthContextProvider } from '@/context/AuthContext';
-
+import ThemeProvider from './provider'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem >   
+           
         <AuthContextProvider>
           <Header />
           <main > 
@@ -27,6 +29,8 @@ export default function RootLayout({
           </main>
           <Footer />
         </AuthContextProvider>
+        
+        </ThemeProvider>
       </body>
     </html>
   );

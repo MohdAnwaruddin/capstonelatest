@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import axiosInstance from "../../../../axiosInstance";
 import { useEffect, useState } from "react";
 import Comment  from "@/app/components/layout/Comment";
 import "./page.css"
@@ -24,8 +24,8 @@ export default function Id({ params }: any) {
     // Fetch news for the specified newsid
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          `https://server-one-sand.vercel.app/api/news/id/${params.id}`
+        const response = await axiosInstance.get(
+          `/api/news/id/${params.id}`
         );
         //console.log('data:',response.data);
         setNewsInfo(response.data);

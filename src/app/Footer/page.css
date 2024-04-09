@@ -1,11 +1,20 @@
 .footer {
-    min-width: 10vw;
-    display: flex;
-    flex-direction: row;
-    gap: 9.3vw;
-    padding: 62px;
-    margin-left: 0vw;
-    margin-right: 0vw;
-
-
-}
+    background-color: #14B8A6;
+    color: #14B8A6;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }

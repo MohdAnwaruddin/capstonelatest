@@ -6,6 +6,7 @@ import AuthContext, { AuthContextType } from '@/context/AuthContext';
 import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import ThemeSwitch from "../ThemeSwitch";
 
 const Header: React.FC = () => {
   const handleSearchChange = (searchTerm: string) => {
@@ -33,7 +34,7 @@ const Header: React.FC = () => {
     console.log("Filtering with search term:", searchTerm);
   };
   return (
-    <nav className="flex items-center flex-wrap bg-teal-500 p-6 justify-between">
+    <nav className="header flex items-center flex-wrap bg-teal-500 p-6 justify-between">
       <div className="flex items-center flex-shrink-0 text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="fill-none w-6 h-6 mr-2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
@@ -53,19 +54,21 @@ const Header: React.FC = () => {
            <button onClick={logout} 
            className='px-4 py-2 rounded-full bg-green-500 text-white font-semibold border border-green-600 hover:bg-green-600 focus:outline-none focus:bg-green-600 flex items-center'            
            > Logout</button>
+      <ThemeSwitch />
            
             </div>
             
           
         ) : (
-            <>
+            <div className="no-user">
             {/* <li className="user-section-item">
                 <Link href='/login' className={pathname == '/login' ? 'active' : ''}>Login</Link>
             </li> */}
              <Link href={'/login'} className='px-4 py-2 rounded-full bg-green-500 text-white font-semibold border border-green-600 hover:bg-green-600 focus:outline-none focus:bg-green-600 flex items-center'>Login</Link>
+             <ThemeSwitch />
   
        
-        </>
+        </div>
          
         )}
 

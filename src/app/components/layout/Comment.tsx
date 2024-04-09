@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../../../axiosInstance";
 import { useEffect, useState } from "react";
 
 
@@ -16,8 +16,8 @@ const Comment = ({ id }: any) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(
-          `https://server-one-sand.vercel.app/api/news/id/${id}/comments`
+        const response = await axiosInstance.get(
+          `/api/news/id/${id}/comments`
         );
         console.log("Response data:", response.data);
         setCommentInfo(response.data.comments); // Assuming the response data is an object containing a 'comments' array
@@ -38,8 +38,8 @@ const Comment = ({ id }: any) => {
     e.preventDefault();
     if (newComment.trim().length > 0) {
       try {
-        const response = await axios.post(
-          `https://server-one-sand.vercel.app/api/news/id/${id}/comments`,
+        const response = await axiosInstance.post(
+          `/api/news/id/${id}/comments`,
           { text: newComment, username  }
         );
         const newCommentData = response.data;

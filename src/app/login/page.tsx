@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 
 import { useState, useContext } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../../axiosInstance';
 import AuthContext, { AuthContextType } from '@/context/AuthContext';
 import Link from 'next/link';
 
@@ -62,22 +62,27 @@ const Login = () => {
     if (formIsValid) {
     // If form is valid, proceed with submission
     try {
-      const response = await axios.post(
-        'https://server-one-sand.vercel.app/api/auth/login',
+      const response = await axiosInstance.post(
+        '/api/auth/login',
         { username, email : username, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      console.log('Login successful');
-      localStorage.setItem('_id', response.data.user._id);
-      localStorage.setItem('username', response.data.user.username);
-      localStorage.setItem('token', response.data.token);
+      console.log('Login successful', response);
+      if(response.status == 200){
+        localStorage.setItem('_id', response.data.user._id);
+        localStorage.setItem('username', response.data.user.username);
+        localStorage.setItem('token', response.data.token);
+  
+        auth.login();
+        router.push('/');
+      }else if(response.data.code == 401){
 
-      auth.login();
-      router.push('/');
+      }
+
     } catch (err: any) {
       console.log(err);
-      //setError( err.response.data.error||err.response.data ||'something went wrong');
+      setError( err.response.data.error||err.response.data ||'something went wrong');
     }
   }
   };
