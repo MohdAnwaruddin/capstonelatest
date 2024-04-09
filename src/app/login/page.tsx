@@ -5,6 +5,7 @@ import { useState, useContext } from 'react';
 import axiosInstance from '../../../axiosInstance';
 import AuthContext, { AuthContextType } from '@/context/AuthContext';
 import Link from 'next/link';
+import '../../app/components/layout/layout.css'
 
 
 const Login = () => {
@@ -88,7 +89,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-4 lg:px-8">
+    <div className="container flex min-h-full flex-col justify-center px-6 py-4 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img className="mx-auto h-24 w-auto" src="news.png" alt="logo" />
         <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-teal-600">Sign in to your account</h2>
